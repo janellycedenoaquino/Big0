@@ -11,12 +11,15 @@ const coolName = (name) =>{
 // coolName("aVeryLongNameLoremIpsumNequeporroquisquamestquidoloremipsumquiadolorsitametconsecteturadipiscivelit");
 
 // O(N) 
-const linearTime = (N) =>{
+const linearTime = (N) =>{ //It will always depend of the size of the input if N = 1 then the big O is O(1). 
+  //big O is always worse case scenario thus we have to think about the worse input... whatever large value N could possibly be
+  let zero = "";
     for(let i = 0; i < N; i++){
-        
+        zero += `\n${N*i}`;
     }
+    console.log(zero);
 }
-
+// linearTime(4)
 //_______________________________________________________O(log n)____________________________________________________________________________//
 
 
@@ -57,41 +60,54 @@ let start = 0;
 let end = arr.length-1; //initialized after arr is filled
 let target = 40;
 
-
 // findTarget(arr, start, end, target);
 
 
 //_____________________________________________________O(N log N)____________________________________________________________________________//
+const logLinear = (N) =>{
+  let originalNValue  = N;
+  while(N > 1){ //Loop which is  O(N)
+   N = Math.floor(N/2); //while loop value changes to O(log) because we are halving it's value as we keep going back to line 68
+   console.log('Value of N before iterating!', N) 
+   for(let i = 0; i < originalNValue; i++){
+     console.log('we will still be iterating through the complete value of N')
+   }
+  }
+  //while loop === O(Log N)  for loop === O(N)   ===   O(Log N * N) ===>  O(N Log N)
+}
+// logLinear(5); //if we hadn't cut the value in half this function would have ran infinitely intead of 10x
 
-// // O(n log n)
-// let unsortedArr = [];
-// for(let i = 0; i<5; i++){
-//   unsortedArr.unshift(i);
-// }
-// console.log(unsortedArr)
-// const mergeSort = (arr)=>{
-//   const originalArr = arr
-//   let left = arr.splice(0, (originalArr.length/2))
-//   let right = arr.splice((originalArr.length/2)-1)
-//   console.log('left: ',left,'right: ', right)
-//   sort(left);
+
+let unsortedArr = [];
+for(let i = 0; i<5; i++){
+  unsortedArr.unshift(i);
+}
+
+const mergeSort = (arr)=>{
+
+  const middleIdx = Math.floor(arr.length / 2)
+
+  let left = arr.slice(0, middleIdx)
+  let right = arr.slice(middleIdx, arr.length )
+  console.log('left: ',left,'right: ', right)
+  sort(left);
   
-// }
+}
 
-// const sort = (arr) =>{
-//   console.log(arr)
-//   let sortedArr = [];
-//   for(let i = 0; i < arr.length-1; i++){
-//     if(!arr[i+1] ){
-//       console.log('done', arr[i+1]);
-//     }else if(arr[i] > arr[i+1]){
-//       console.log("it's greater than: ",arr[i], arr[i+1])
+const sort = (arr) =>{
+  console.log(arr)
+  let sortedArr = [];
+  for(let i = 0; i < arr.length-1; i++){
+    if(!arr[i+1] ){
+      console.log('done', arr[i+1]);
+    }else if(arr[i] > arr[i+1]){
+      console.log("it's greater than: ",arr[i], arr[i+1])
       
-//     }
-//   }
-// }
+    }
+  }
+}
 
-// mergeSort(unsortedArr);
+mergeSort(unsortedArr);
 
 
 //_______________________________________________________O(N^3)__________________________________________________________________________//
