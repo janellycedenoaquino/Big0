@@ -1,4 +1,5 @@
-//O(1)
+//_______________________________________________________O(1)____________________________________________________________________________//
+
 const coolName = (name) =>{
     if(name.length >= 1){ 
         //length is a built in property in JS and in most languages. length of name wont matter because the property is O(1)!
@@ -16,23 +17,10 @@ const linearTime = (N) =>{
     }
 }
 
-// O(n^3)                   a complexity this high is never optimal 
-const cube = (size) =>{  // size === N
-
-    for(let i=0; i < size; i++){ //O(N) loops are automatic O(N) because it depends on whatever N is!
-        for(let j=0; j < size; j++){ //O(N)
-          for(let k=0; k < size; k++){ //O(N)
-            console.log(i, j, k)
-          }
-        }
-    }
-  }
-  // These loops are nested which means this value must be multiplied: O(N) * O(N) * O(N) === O(N^1 + N^1+ N^1) === O(N^3)
-  
-//   cube(3);
+//_______________________________________________________O(log n)____________________________________________________________________________//
 
 
-//O (log n)
+//_______________________________________________________O(N)____________________________________________________________________________//
 const findTarget = (arr, start, end, target) => {
   let mid = Math.floor((start + end)/2)
 
@@ -73,6 +61,7 @@ let target = 40;
 // findTarget(arr, start, end, target);
 
 
+//_____________________________________________________O(N log N)____________________________________________________________________________//
 
 // // O(n log n)
 // let unsortedArr = [];
@@ -103,3 +92,21 @@ let target = 40;
 // }
 
 // mergeSort(unsortedArr);
+
+
+//_______________________________________________________O(N^3)__________________________________________________________________________//
+
+// O(n^3)                   a complexity this high is never optimal 
+const cube = (size) =>{  // size === N
+
+    for(let i=0; i < size; i++){ //O(N) loops are automatic O(N) because it depends on whatever N is!
+        for(let j=0; j < size; j++){ //O(N)
+          for(let k=0; k < size; k++){ //O(N)
+            console.log(i, j, k)
+          }
+        }
+    }
+  }
+  // These loops are nested which means this value must be multiplied: O(N) * O(N) * O(N) === O(N^1 + N^1+ N^1) === O(N^3)
+  
+//   cube(3);
