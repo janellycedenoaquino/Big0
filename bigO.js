@@ -1,128 +1,86 @@
-//_______________________________________________________O(1)____________________________________________________________________________//
+const coolName = require('./constantTime.js')
+const {linearTime, findTarget} = require('./linearTime.js')
+const logarithmicTime = require('./logarithmicTime.js')
+const {logLinear, mergeSort} = require('./logLinearTime')
+const {cube, factorial, fibonacci, visualFactorial} = require('./badSolutions')
+const {countDown, twoInputsAdded, twoInputsMultiplied} = require('./spaceComplexity')
 
-const coolName = (name) =>{
-    if(name.length >= 1){ 
-        //length is a built in property in JS and in most languages. length of name wont matter because the property is O(1)!
-        console.log(`cool name!, ${name}`)
-    }
-}
+
+//_______________________________________________________O(1)____________________________________________________________________________//
+//O(1) complexity, to check the code visit file ====>  constantTime.js
+
+
 // coolName("Janelly");
 // both will take the same time! O(1)
 // coolName("aVeryLongNameLoremIpsumNequeporroquisquamestquidoloremipsumquiadolorsitametconsecteturadipiscivelit");
 
-// O(N) 
-const linearTime = (N) =>{ //It will always depend of the size of the input if N = 1 then the big O is O(1). 
-  //big O is always worse case scenario thus we have to think about the worse input... whatever large value N could possibly be
-  let zero = "";
-    for(let i = 0; i < N; i++){
-        zero += `\n${N*i}`;
-    }
-    console.log(zero);
-}
-// linearTime(4)
+
 //_______________________________________________________O(log n)____________________________________________________________________________//
+//O(log n) complexity, to check the code visit file ====>  logarithmicTime.js
+// logarithmicTime()
+
 
 
 //_______________________________________________________O(N)____________________________________________________________________________//
-const findTarget = (arr, start, end, target) => {
-  let mid = Math.floor((start + end)/2)
-
-  console.log("array value: ",arr.slice(start, end), "\n\n") //for every recursive iteration we see the array halving 
+//O(N) complexity, to check the code visit file ====>  linearTime.js
 
 
-  if(start > end) {// when the start get's to a point that it is larger than the end we don't have any more to search because the value does not exist 
-    console.log('\n\ndid not find it =( ') 
-    return false
-  };
+// linearTime(10)
+// linearTime(100) 
+// linearTime(1000)
+//depends on the size of the input which is why it is o(n)
+// the larger the input the larger it grows
 
-  if(arr[mid] === target){
-    console.log('found it! ', arr[mid])
-    return true;
-  
-  }else if(arr[mid] < target) {
-      console.log("the target is larger let's move up! \nthe number we landed on:", arr[mid], "\n\n"); //visually showing the number we landed on 
-      findTarget(arr, mid + 1, end, target) //recursive changing the start for the mid because this is our new starting point   
-      //the reason this function is O(log n) because we half it every time we call the function over new start point makse it so that we half the initial array
-  
-  }else if(arr[mid] > target) {
-      console.log("the target is smaller let's move down! \nthe number we landed on:", arr[mid], "\n\n");
-      findTarget(arr, start, mid, target)
-      //both conditionals cut array in half making it logarithm base! 
-  }
-}
 
-let arr = [];
-for(let i = 0; i<100; i++){ //generate sorted large array
-    arr.push(i);
-  }
-
-let start = 0;
-let end = arr.length-1; //initialized after arr is filled
-let target = 40;
+//findTargetFunction given a number it will attempt to find it in a sorted array of numbers
+// let start = 0;
+// let target = 40;
+// let arr = [10,20,22,35,40,44,47,52]
+// let end = arr.length-1; //initialized after arr is filled
 
 // findTarget(arr, start, end, target);
 
 
-//_____________________________________________________O(N log N)____________________________________________________________________________//
-const logLinear = (N) =>{
-  let originalNValue  = N;
-  while(N > 1){ //Loop which is  O(N)
-   N = Math.floor(N/2); //while loop value changes to O(log) because we are halving it's value as we keep going back to line 68
-   console.log('Value of N before iterating!', N) 
-   for(let i = 0; i < originalNValue; i++){
-     console.log('we will still be iterating through the complete value of N')
-   }
-  }
-  //while loop === O(Log N)  for loop === O(N)   ===   O(Log N * N) ===>  O(N Log N)
-}
-// logLinear(5); //if we hadn't cut the value in half this function would have ran infinitely intead of 10x
+//_____________________________________________________O(n log n)____________________________________________________________________________//
+//O(n log n) complexity, to check the code visit file ====>  logLinearTime.js
+
+// logLinear(5); 
+// logLinear(25); 
+// logLinear(15); 
+//slices value in half every time the function runs resulting in 5 not having to run 25 times total
+//but instead instead the nested loop halfing one of the loops every iteration
+
+// __________________MERGESORT______________________// O(n log n)
+
+// let unsortedArr = [];
+// for(let i = 1; i<25; i++){
+//   unsortedArr.unshift(i);
+// }
+
+// mergeSort(unsortedArr)
+
+// mergeSort([1,3,5,7,2,4,6,8,9])
+// mergeSort([9,7,5,3,1,2,4,6,8])
 
 
-let unsortedArr = [];
-for(let i = 0; i<5; i++){
-  unsortedArr.unshift(i);
-}
+//_______________________________________________________O(N^2 to O(N!))_________________________________________________________________//
+//for complexities higher than O(n log n) visit file ====>  badSolutions.js
 
-const mergeSort = (arr)=>{
+// cube(3);
+// factorial(3)
+// visualFactorial(4) /* Huge difference in growth only four numbers apart */  
+// visualFactorial(8)
+// fibonacci(5)
 
-  const middleIdx = Math.floor(arr.length / 2)
-
-  let left = arr.slice(0, middleIdx)
-  let right = arr.slice(middleIdx, arr.length )
-  console.log('left: ',left,'right: ', right)
-  sort(left);
-  
-}
-
-const sort = (arr) =>{
-  console.log(arr)
-  let sortedArr = [];
-  for(let i = 0; i < arr.length-1; i++){
-    if(!arr[i+1] ){
-      console.log('done', arr[i+1]);
-    }else if(arr[i] > arr[i+1]){
-      console.log("it's greater than: ",arr[i], arr[i+1])
-      
-    }
-  }
-}
-
-mergeSort(unsortedArr);
+// visit file ====>  spaceComplexity.js
+// twoInputsAdded(5,2) // runs 7 times O(a + b) === O(a + b)  Because they are two different inputs and won't mix
+// twoInputsMultiplied(5,2) //runs 10 times O(a * b) === O(a * b)
 
 
-//_______________________________________________________O(N^3)__________________________________________________________________________//
 
-// O(n^3)                   a complexity this high is never optimal 
-const cube = (size) =>{  // size === N
+//_______________________________________________________SPACE COMPLEXITY________________________________________________________________//
 
-    for(let i=0; i < size; i++){ //O(N) loops are automatic O(N) because it depends on whatever N is!
-        for(let j=0; j < size; j++){ //O(N)
-          for(let k=0; k < size; k++){ //O(N)
-            console.log(i, j, k)
-          }
-        }
-    }
-  }
-  // These loops are nested which means this value must be multiplied: O(N) * O(N) * O(N) === O(N^1 + N^1+ N^1) === O(N^3)
-  
-//   cube(3);
+// countDown(3); //O(N)
+// twoInputsAdded(5,2)          // O(1) there aren't any variables initialized inside the for loop
+// twoInputsMultiplied(5,2)     // O(1) there aren't any variables initialized inside the for loop
+
